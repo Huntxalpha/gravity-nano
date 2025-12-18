@@ -18,11 +18,18 @@ const player = {
 // Obstacle constants
 const OBSTACLE_WIDTH = 40;
 const GAP_HEIGHT = 150;
-const SPEED = 2.5;
+
+// Valeurs initiales pour la vitesse et l'intervalle d'apparition des obstacles.
+const INITIAL_SPEED = 2.5;
+const INITIAL_SPAWN_INTERVAL = 140;
+
+// Variables de jeu modifiables au fil de la partie.
+let speed = INITIAL_SPEED;
+let spawnInterval = INITIAL_SPAWN_INTERVAL;
 
 let obstacles = [];
 let spawnTimer = 0;
-let spawnInterval = 140; // frames entre chaque obstacle
+// spawnInterval est défini dynamiquement ci-dessus et ajusté pendant la partie.
 let score = 0;
 let gameState = 'start';
 
@@ -42,6 +49,9 @@ function startGame() {
   obstacles = [];
   player.isTop = false;
   spawnTimer = 0;
+  // Réinitialiser la vitesse et l'intervalle d'apparition à leurs valeurs initiales
+  speed = INITIAL_SPEED;
+  spawnInterval = INITIAL_SPAWN_INTERVAL;
   scoreSpan.textContent = '0';
   hideOverlay(startOverlay);
   hideOverlay(endOverlay);
@@ -102,13 +112,23 @@ function updateGame() {
   // Mettre à jour la position des obstacles
   for (let i = obstacles.length - 1; i >= 0; i--) {
     const obstacle = obstacles[i];
-    obstacle.x -= SPEED;
+    obstacle.x -= speed;
 
     // Détecter le franchissement pour incrémenter le score
     if (!obstacle.passed && obstacle.x + OBSTACLE_WIDTH < player.x) {
       obstacle.passed = true;
       score++;
       scoreSpan.textContent = score.toString();
+      // Augmenter la difficulté à mesure que le joueur marque des points.
+      // Toutes les 5 barres franchies, accélérer le déplacement et réduire l'intervalle d'apparition.
+      if (score % 5 === 0) {
+        // Augmenter légèrement la vitesse
+        speed += 0.3;
+        // Réduire l'intervalle d'apparition jusqu'à un minimum de 60 frames
+        if (spawnInterval > 60) {
+          spawnInterval -= 10;
+        }
+      }
     }
 
     // Supprimer les obstacles sortis de l'écran
@@ -121,14 +141,15 @@ function updateGame() {
     if (obstacle.x < player.x + player.width && obstacle.x + OBSTACLE_WIDTH > player.x) {
       if (obstacle.orientation === 0) {
         // Gap en haut (obstacle en bas)
-        // Collision si joueur en bas
+        // Collide si joueur sur le bas
         if (!player.isTop) {
+          // Collision si joueur en bas
           endGame();
           return;
         }
       } else {
         // Gap en bas (obstacle en haut)
-        // Collision si joueur en haut
+        // Collide si joueur sur le haut
         if (player.isTop) {
           endGame();
           return;
