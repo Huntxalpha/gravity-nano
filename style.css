@@ -1,0 +1,92 @@
+/* Styles du jeu Gravity Flip Nano */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(180deg, #0f044c, #141852 50%, #020412);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+#game-container {
+    position: relative;
+    width: 320px;
+    height: 480px;
+    border-radius: 12px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background: radial-gradient(circle at top right, rgba(40, 63, 169, 0.4), rgba(14, 4, 76, 0.8));
+}
+
+/* Scoreboard positionné en haut à gauche du conteneur */
+#scoreboard {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 2;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, #1a1a2e, #0f044c);
+}
+
+/* Overlays */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.overlay h1 {
+    margin: 0 0 16px;
+    font-size: 28px;
+    color: #f6b93b;
+}
+
+.overlay p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #dedede;
+}
+
+button {
+    background-color: #9b59b6;
+    border: none;
+    color: #fff;
+    padding: 12px 24px;
+    margin: 8px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #884ea0;
+}
+
+button:active {
+    transform: translateY(2px);
+}
