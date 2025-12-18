@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Open Graph / Twitter Card meta tags for rich link previews -->
+    <meta property="og:title" content="Gravity Flip Nano – Jeu instantané"/>
+    <meta property="og:description" content="Changez la gravité d’un simple tap pour éviter les obstacles et cumuler les points ! Jouez sans téléchargement."/>
+    <!-- Utilisation d'une image libre de droits hébergée sur Unsplash pour la prévisualisation -->
+    <meta property="og:image" content="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=640&q=80"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <title>Gravity Flip Nano</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <div id="scoreboard">Score : <span id="score">0</span></div>
+        <canvas id="game-canvas" width="320" height="480"></canvas>
+
+        <!-- Écran de démarrage -->
+        <div id="start-overlay" class="overlay">
+            <h1>Gravity Flip Nano</h1>
+            <p>Appuyez pour inverser la gravité et éviter les barres. Votre score augmente à chaque obstacle franchi.</p>
+            <button id="start-button">Démarrer</button>
+        </div>
+
+        <!-- Écran de fin de jeu -->
+        <div id="end-overlay" class="overlay" style="display:none;">
+            <h1>Game Over</h1>
+            <p>Votre score : <span id="final-score">0</span></p>
+            <button id="restart-button">Rejouer</button>
+            <button id="share-button">Partager mon score</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
